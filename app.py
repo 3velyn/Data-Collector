@@ -1,7 +1,6 @@
 import re
-from flask import Flask, render_template, request
-
-app = Flask(__name__)
+from flask import render_template, request
+from data import app, Data
 
 @app.route('/')
 def index():
@@ -9,6 +8,9 @@ def index():
 
 @app.route('/success', methods=['POST'])
 def success():
+    if request.method == 'POST':
+        email = request.form['email_name']
+        height = request.form['height_name']
     return render_template('success.html')
 
 if __name__ == '__main__':
