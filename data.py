@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLACHEMY_DATABASE_URI'] ='postgresql://postgres:@localhost/height_collector'
+app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql://postgres:@localhost/height_collector'
 db = SQLAlchemy(app)
 
 class Data(db.Model):
