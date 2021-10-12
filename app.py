@@ -1,6 +1,7 @@
 import re
 from flask import render_template, request
 from data import app, Data, db
+from send_email import send_email
 
 @app.route('/')
 def index():
@@ -11,6 +12,8 @@ def success():
     if request.method == 'POST':
         email = request.form['email_name']
         height = request.form['height_name']
+
+        send_email(email, height)
 
         if db.session.query(Data).filter(Data.email_ ==  email).count() == 0:
             data = Data(email, height)
