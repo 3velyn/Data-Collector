@@ -12,15 +12,14 @@ def success():
     if request.method == 'POST':
         email = request.form['email_name']
         height = request.form['height_name']
+        user = db.session.query(Data).filter(Data.email_ == email)
 
-        if db.session.query(Data).filter(Data.email_ ==  email).count() == 0:
+        if user.count() == 0:
             data = Data(email, height)
             db.session.add(data)
             db.session.commit()
-
         else:    
-            user = db.session.query(Data).filter(Data.email_ == email).first()
-            user.height_ = height
+            user.first().height_ = height
             db.session.commit()
 
         average_height = round(db.session.query(func.avg(Data.height_)).scalar(), 1)
